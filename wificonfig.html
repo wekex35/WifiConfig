@@ -1,0 +1,253 @@
+<html>
+
+<head>
+    <title>Config Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .configform {
+            display: none;
+            width: auto;
+            border: 1px solid #ccc;
+            padding: 14px;
+            background: #ececec;
+        }
+
+        #submit {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Welcome to I-Konnect</h1>
+        <center> <button id="wifiButton" class="button" onclick="display()">Wifi Configuration</button>
+            &nbsp; &nbsp; &nbsp; &nbsp &nbsp; &nbsp; <button id="ethernetButton" class="button"
+                onclick="ethernetdisplay()">Ethernet Configuration</button>
+            <div>
+                <form class="configform" action="/configwifi" method="post"> </form>
+            </div>
+            <div id="wifiradioButton" style="display:none"> <br> <input type="radio" id="wifistatic" name="wifi"
+                    value="Static" class="form-radio" onclick="showwifistatic()"> <label for="Static">Static</label>
+                <input type="radio" id="wifidynamic" name="wifi" value="dynamic" onclick="showwifidynamic()"> <label
+                    for="dynamic">Dynamic</label>
+            </div>
+            <div id="ethernetradioButton" style="display:none"> <br> <input type="radio" id="ethernetstatic" name="wifi"
+                    value="Static" class="form-radio" onclick="ehternetstatic()"> <label for="Static">Static</label>
+                <input type="radio" id="ethernetdynamic" name="wifi" value="dynamic" onclick="ehternetdynamic()"> <label
+                    for="dynamic">Dynamic</label>
+            </div>
+            <div>
+                <form id="wifidynamicform" class="configform" action="/configwifi" method="post"> <input type="hidden"
+                        name="configtype" value='1'>
+                    <center>
+                        <h3>MQTT</h3>
+                        </center>
+                        <table>
+                            <tr>
+                                <td><label>IP :</label></td>
+                                <td><input type="text" name="mqttip" placeholder="xxx.xxx.xxx.xx"
+                                        autocomplete="off"></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Port : </label></td>
+                                <td><input type="text" name="mqttport" placeholder="Enter Port" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>User Name:</label></td>
+                                <td><input type="text" name="UserName" placeholder="Enter User Name" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Password : </label></td>
+                                <td><input type="Password" name="password" placeholder="Enter Password" /></br></td>
+                            </tr>
+                        </table>
+                        <center>
+                            <h3>Wifi</h3>
+                            </center>
+                            <table>
+                                <tr>
+                                    <td><label>SSID : </label></td>
+                                    <td><input type="text" name="ssid" placeholder="Enter SSID" /></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Password : </label></td>
+                                    <td><input type="password" name="ssidpassword" placeholder="Enter password" /></br>
+                                        </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <center><input type="submit" id="submit" name="submit" value="Submit" /></center>
+                </form>
+            </div>
+            <div>
+                <form id="wifistaticform" class="configform" action="/configwifi" method="post"> <input type="hidden"
+                        name="configtype" value='2'>
+                    <center>
+                        <h3>Network:</h3>
+                        </center>
+                        <table>
+                            <tr>
+                                <td><label>IP :</label></td>
+                                <td><input type="text" name="networkip" placeholder="xxx.xxx.xxx.xx"
+                                        autocomplete="off" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Subnet : </label></td>
+                                <td><input type="text" name="Subnet" placeholder="xxx.xxx.xxx.xx"
+                                        autocomplete="off" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Gateway :</label></td>
+                                <td><input type="text" name="gateway" placeholder="Enter Gateway Address" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>DNS : </label></td>
+                                <td><input type="text" name="dns" placeholder="Enter DNS" /></br></td>
+                            </tr>
+                        </table>
+                        <center>
+                            <h3>MQTT</h3>
+                            </center>
+                            <table>
+                                <tr>
+                                    <td><label>IP :</label></td>
+                                    <td><input type="text" name="mqttip" placeholder="xxx.xxx.xxx.xx"
+                                            autocomplete="off"></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Port : </label></td>
+                                    <td><input type="text" name="mqttport" placeholder="Enter Port" /></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>User Name:</label></td>
+                                    <td><input type="text" name="UserName" placeholder="Enter User Name" /></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Password : </label></td>
+                                    <td><input type="Password" name="password" placeholder="Enter Password" /></br></
+                                            td>
+                                </tr>
+                            </table>
+                            <center>
+                                <h3>Wifi</h3>
+                                </center>
+                                <table>
+                                    <tr>
+                                        <td><label>SSID : </label></td>
+                                        <td><input type="text" name="ssid" placeholder="Enter SSID" /></br></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Password : </label></td>
+                                        <td><input type="password" name="ssidpassword"
+                                                placeholder="Enter password" /></br></td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <center><input type="submit" id="submit" name="submit" value="Submit" /></center>
+                </form>
+            </div>
+            <div>
+                <form id="ethernetstaticform" class="configform" action="/configwifi" method="post"> <input
+                        type="hidden" name="configtype" value='4'>
+                    <center>
+                        <h3>Network:</h3>
+                        </center>
+                        <table>
+                            <tr>
+                                <td><label>IP :</label></td>
+                                <td><input type="text" name="networkip" placeholder="xxx.xxx.xxx.xx"
+                                        autocomplete="off" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Subnet : </label></td>
+                                <td><input type="text" name="Subnet" placeholder="xxx.xxx.xxx.xx"
+                                        autocomplete="off" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Gateway :</label></td>
+                                <td><input type="text" name="gateway" placeholder="Enter Gateway Address" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>DNS : </label></td>
+                                <td><input type="text" name="dns" placeholder="Enter DNS" /></br></td>
+                            </tr>
+                        </table>
+                        <center>
+                            <h3>MQTT</h3>
+                            </center>
+                            <table>
+                                <tr>
+                                    <td><label>IP :</label></td>
+                                    <td><input type="text" name="mqttip" placeholder="xxx.xxx.xxx.xx"
+                                            autocomplete="off"></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Port : </label></td>
+                                    <td><input type="text" name="mqttport" placeholder="Enter Port" /></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>User Name:</label></td>
+                                    <td><input type="text" name="UserName" placeholder="Enter User Name" /></br></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Password : </label></td>
+                                    <td><input type="Password" name="password" placeholder="Enter Password" /></br></
+                                            td>
+                                </tr>
+                            </table>
+                            <br>
+                            <center><input type="submit" id="submit" name="submit" value="Submit" /></center>
+                </form>
+            </div>
+            <div>
+                <form id="ethernetdynamicform" class="configform" action="/configwifi" method="post"> <input
+                        type="hidden" name="configtype" value='3'>
+                    <center>
+                        <h3>MQTT</h3>
+                        </center>
+                        <table>
+                            <tr>
+                                <td><label>IP :</label></td>
+                                <td><input type="text" name="mqttip" placeholder="xxx.xxx.xxx.xx"
+                                        autocomplete="off"></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Port : </label></td>
+                                <td><input type="text" name="mqttport" placeholder="Enter Port" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>User Name:</label></td>
+                                <td><input type="text" name="UserName" placeholder="Enter User Name" /></br></td>
+                            </tr>
+                            <tr>
+                                <td><label>Password : </label></td>
+                                <td><input type="Password" name="password" placeholder="Enter Password" /></br></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <center><input type="submit" id="submit" name="submit" value="Submit" /></center>
+                </form>
+            </div>
+            <script> function eternet() { document.getElementById("WifiConfig").style.display = "none"; document.getElementById("Ethernetconfig").style.display = "block"; }; function showwifistatic() { document.getElementById("wifidynamicform").style.display = "none"; document.getElementById("wifistaticform").style.display = "block"; }; function hide() { document.getElementById("network").style.display = "none"; }; function display() { document.getElementById("ethernetdynamicform").style.display = "none"; document.getElementById("ethernetstaticform").style.display = "none"; document.getElementById("ethernetradioButton").style.display = "none"; document.getElementById("wifiradioButton").style.display = "block"; }; function ethernetdisplay() { document.getElementById("wifistaticform").style.display = "none"; document.getElementById("wifidynamicform").style.display = "none"; document.getElementById("wifiradioButton").style.display = "none"; document.getElementById("ethernetradioButton").style.display = "block"; }; function showwifidynamic() { document.getElementById("ethernetdynamicform").style.display = "none"; document.getElementById("ethernetstaticform").style.display = "none"; document.getElementById("wifistaticform").style.display = "none"; document.getElementById("wifidynamicform").style.display = "block"; }; function ehternetstatic() { document.getElementById("wifistaticform").style.display = "none"; document.getElementById("wifidynamicform").style.display = "none"; document.getElementById("ethernetdynamicform").style.display = "none"; document.getElementById("ethernetstaticform").style.display = "block"; }; function ehternetdynamic() { document.getElementById("wifistaticform").style.display = "none"; document.getElementById("wifidynamicform").style.display = "none"; document.getElementById("ethernetstaticform").style.display = "none"; document.getElementById("ethernetdynamicform").style.display = "block"; }; function showehernetstatic() { document.getElementById("ethernetstaticform").style.display = "none"; document.getElementById("ethernetdynamicform").style.display = "none"; document.getElementById("wifidynamicform").style.display = "none"; document.getElementById("wifistaticform").style.display = "block"; }; </script>
+</body>
+
+</html>
